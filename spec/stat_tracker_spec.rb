@@ -38,5 +38,37 @@ RSpec.describe StatTracker do
           expect(stat_tracker.instance_variable_get(:@games).first).to be_a(CSV::Row)
         end
       end
+
+      it "can calculate highest sum of the winning and losing teams’ scores" do
+
+      end
+
+      it "can calculate lowest sum of the winning and losing teams’ scores" do
+
+      end
+
+      it "can calculate the percentage of games that a home team has won (rounded to the nearest 100th)" do
+
+      end
+
+      it "can calculate the percentage of games that a visitor has won (rounded to the nearest 100th)" do
+
+      end
+
+      it "can calculate the percentage of games that has resulted in a tie (rounded to the nearest 100th)" do
+
+      end
+
+      it "can store games by season" do
+
+      end
+
+      it "can averae goals per game" do 
+
+      end
+
+      it 'can average goals per game per season' do
+        
+      end
       
 end
