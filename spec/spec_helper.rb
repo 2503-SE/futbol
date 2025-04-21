@@ -1,3 +1,5 @@
 require 'pry'
 require 'rspec'
-require './lib/stat_tracker'
+require './lib/stat_tracker.rb'
+require './spec/game_spec.rb'
+require './spec/team_spec.rb'
