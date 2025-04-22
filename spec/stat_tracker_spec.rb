@@ -37,38 +37,113 @@ RSpec.describe StatTracker do
           expect(stat_tracker.instance_variable_get(:@game_teams)).to be_a(CSV::Table)
           expect(stat_tracker.instance_variable_get(:@games).first).to be_a(CSV::Row)
         end
-      end
+    end
 
-      it "can calculate highest sum of the winning and losing teams’ scores" do
-
-      end
-
-      it "can calculate lowest sum of the winning and losing teams’ scores" do
-
-      end
-
-      it "can calculate the percentage of games that a home team has won (rounded to the nearest 100th)" do
-
-      end
-
-      it "can calculate the percentage of games that a visitor has won (rounded to the nearest 100th)" do
-
-      end
-
-      it "can calculate the percentage of games that has resulted in a tie (rounded to the nearest 100th)" do
-
-      end
-
-      it "can store games by season" do
-
-      end
-
-      it "can averae goals per game" do 
-
-      end
-
-      it 'can average goals per game per season' do
+    describe 'calculate' do
+        it "can calculate highest sum of the winning and losing teams’ scores" do
+            locations = {
+                games: './spec/fixtures/games_fixture.csv',
+                teams: './spec/fixtures/teams_fixture.csv',
+                game_teams: './spec/fixtures/game_teams_fixture.csv'
+            }
         
-      end
+            stat_tracker = StatTracker.from_csv(locations)
+            expect(stat_tracker.highest_total_score).to eq(5) # 2+4 = 6 in Game 3
+        
+        end
+
+        it "can calculate lowest sum of the winning and losing teams’ scores" do
+            locations = {
+                games: './spec/fixtures/games_fixture.csv',
+                teams: './spec/fixtures/teams_fixture.csv',
+                game_teams: './spec/fixtures/game_teams_fixture.csv'
+            }
+
+            stat_tracker = StatTracker.from_csv(locations)
+            expect(stat_tracker.lowest_total_score).to eq(2) # Adjust based on your fixture data
+
+
+        end
+
+        it "can calculate the percentage of games that a home team has won (rounded to the nearest 100th)" do
+            locations = {
+                games: './spec/fixtures/games_fixture.csv',
+                teams: './spec/fixtures/teams_fixture.csv',
+                game_teams: './spec/fixtures/game_teams_fixture.csv'
+              }
+            
+              stat_tracker = StatTracker.from_csv(locations)
+              expect(stat_tracker.percentage_home_wins).to eq(0.67) # Adjust based on your fixture data
+            
+
+        end
+
+        it "can calculate the percentage of games that a visitor has won (rounded to the nearest 100th)" do
+            stat_tracker = StatTracker.from_csv({
+                games: './spec/fixtures/games_fixture.csv',
+                teams: './spec/fixtures/teams_fixture.csv',
+                game_teams: './spec/fixtures/game_teams_fixture.csv'
+              })
+            
+              expect(stat_tracker.percentage_visitor_wins).to eq(0.0) # Adjust based on fixture
+            
+
+        end
+
+        it "can calculate the percentage of games that has resulted in a tie (rounded to the nearest 100th)" do
+            stat_tracker = StatTracker.from_csv({
+                games: './spec/fixtures/games_fixture.csv',
+                teams: './spec/fixtures/teams_fixture.csv',
+                game_teams: './spec/fixtures/game_teams_fixture.csv'
+              })
+            
+              expect(stat_tracker.percentage_ties).to eq(0.33) # Update based on fixture data
+            
+
+        end
+
+        it "can store games by season" do
+            stat_tracker = StatTracker.from_csv({
+                games: './spec/fixtures/games_fixture.csv',
+                teams: './spec/fixtures/teams_fixture.csv',
+                game_teams: './spec/fixtures/game_teams_fixture.csv'
+              })
+            
+              expect(stat_tracker.count_of_games_by_season).to eq({
+                "20122013" => 2,
+                "20132014" => 1
+              }) # Adjust based on your fixtures
+            
+
+        end
+
+        it "can averae goals per game" do 
+            stat_tracker = StatTracker.from_csv({
+                games: './spec/fixtures/games_fixture.csv',
+                teams: './spec/fixtures/teams_fixture.csv',
+                game_teams: './spec/fixtures/game_teams_fixture.csv'
+              })
+            
+              expect(stat_tracker.average_goals_per_game).to eq(3.67) # Update to match fixture
+            
+
+        end
+
+        it 'can average goals per game per season' do
+            stat_tracker = StatTracker.from_csv({
+                games: './spec/fixtures/games_fixture.csv',
+                teams: './spec/fixtures/teams_fixture.csv',
+                game_teams: './spec/fixtures/game_teams_fixture.csv'
+              })
+            
+              expect(stat_tracker.average_goals_by_season).to eq({
+                "20122013" => 3.5,
+                "20132014" => 4.0
+              }) # Adjust based on your fixture
+            
+        end
+
+    end
+    
       
 end

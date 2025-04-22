@@ -1,0 +1,4 @@
+game_id,season,type,date_time,away_team_id,home_team_id,away_goals,home_goals,venue,venue_link
+1,20122013,Regular,10/10/12,3,6,2,3,Arena One,/link1
+2,20122013,Regular,10/12/12,5,1,1,1,Arena Two,/link2
+3,20132014,Regular,10/14/13,8,2,0,4,Arena Three,/link3
