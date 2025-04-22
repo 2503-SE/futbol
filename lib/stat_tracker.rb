@@ -1,10 +1,14 @@
 require 'CSV'
 require_relative './game'
 require_relative './team'
+require_relative './game_factory'
+require_relative './team_factory'
+require_relative './game_team_factory'
 
 class StatTracker
 
     attr_reader :games, :teams, :game_teams
+    
     def initialize(games, teams, game_teams)
         @games = games
         @teams = teams
@@ -71,8 +75,7 @@ class StatTracker
         total_goals = game[:home_goals].to_i + game[:away_goals].to_i
         season_totals[season][:goals] += total_goals
         season_totals[season][:games] += 1
-      end
-  
+   
       averages = {}
       season_totals.each do |season, data|
         averages[season] = (data[:goals].to_f / data[:games]).round(2)
@@ -80,5 +83,4 @@ class StatTracker
   
       averages
     end
-
 end
