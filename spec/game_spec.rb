@@ -1,4 +1,5 @@
 require 'spec_helper'
+require './lib/game'
 
 RSpec.describe Game do
 
@@ -20,11 +21,11 @@ RSpec.describe Game do
     @game = Game.new(@row)
   end
   
-  it '#initializes' do
+  it '#initializes with correct values' do
 
     expect(@game).to be_a(Game)
+    
     expect(@game.game_id).to eq(2012030221)
-
     expect(@game.season).to eq("20122013")
     expect(@game.type).to eq("Postseason")
     expect(@game.date_time).to eq("5/16/13")
