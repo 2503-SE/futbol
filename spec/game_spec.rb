@@ -21,7 +21,7 @@ RSpec.describe Game do
     @game = Game.new(@row)
   end
   
-  it '#initializes with correct values' do
+  it 'initializes with the correct values' do
 
     expect(@game).to be_a(Game)
     

@@ -8,6 +8,5 @@ Rspec.describe GameTeamFactory do
 
 
 
-
   
 end

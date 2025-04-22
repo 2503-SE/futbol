@@ -1,0 +1,8 @@
+class GameTeamFactory
+
+
+
+
+
+  
+end

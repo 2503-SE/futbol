@@ -9,6 +9,5 @@ RSpec.describe TeamFactory do
 
 
 
-
   
 end

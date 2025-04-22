@@ -26,7 +26,7 @@ RSpec.describe GameTeam do
     @game_team = GameTeam.new(@row)
   end
   
-  it '#initializes with the correct values' do
+  it 'initializes with the correct values' do
 
     expect(@game_team).to be_an_instance_of(GameTeam)
     
