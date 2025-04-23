@@ -5,9 +5,9 @@ require_relative './game_team'
 # require_relative './game_factory'
 # require_relative './team_factory'
 # require_relative './game_team_factory'
-# require_relative './lib.game_statistics'
-# require_relative './lib.league_statistics'
-# require_relative './lib.season_statistics'
+# require_relative './lib/game_statistics'
+# require_relative './lib/league_statistics'
+# require_relative './lib/season_statistics'
 
 class StatTracker
 
@@ -31,20 +31,20 @@ class StatTracker
 
     def highest_total_score
         @games.map do |game|
-            game[:home_goals].to_i + game[:away_goals].to_i
+            game.home_goals + game.away_goals
         end.max
     end
 
     def lowest_total_score
         @games.map do |game|
-            game[:home_goals].to_i + game[:away_goals].to_i
+            game.home_goals + game.away_goals
         end.min
     end
 
     def percentage_home_wins
         total_games = @games.length
         home_wins = @games.count do |game|
-            game[:home_goals].to_i > game[:away_goals].to_i
+            game.home_goals > game.away_goals
         end
         (home_wins.to_f / total_games).round(2)
 
@@ -53,16 +53,25 @@ class StatTracker
     def percentage_visitor_wins
         total_games = @games.length
         visitor_wins = @games.count do |game|
-            game[:away_goals].to_i > game[:home_goals].to_i
+            game.away_goals > game.home_goals
         end
         (visitor_wins.to_f / total_games).round(2)
 
     end
 
+    def percentage_ties
+        total_games = @games.length
+        ties = @games.count do |game|
+          game.home_goals == game.away_goals
+        end
+
+        (ties.to_f / total_games).round(2)
+    end
+
     def count_of_games_by_season
         counts = Hash.new(0)
         @games.each do |game|
-          counts[game[:season]] += 1
+          counts[game.season] += 1
         end
         counts
     end
@@ -70,23 +79,30 @@ class StatTracker
     def average_goals_per_game
         total_goals = 0
         @games.each do |game|
-            total_goals += game[:home_goals].to_i + game[:away_goals].to_i
+            total_goals += game.home_goals + game.away_goals
         end
         (total_goals.to_f / @games.length).round(2)
 
     end
 
     def average_goals_by_season
-        season = game[:season]
-        total_goals = game[:home_goals].to_i + game[:away_goals].to_i
-        season_totals[season][:goals] += total_goals
-        season_totals[season][:games] += 1
-   
-      averages = {}
-      season_totals.each do |season, data|
-        averages[season] = (data[:goals].to_f / data[:games]).round(2)
-      end
-  
-      averages
+        season_totals = Hash.new do |hash, key| 
+            hash[key] = { goals: 0, games: 0 } 
+        end
+      
+        @games.each do |game|
+          season = game.season
+          total_goals = game.home_goals + game.away_goals
+          season_totals[season][:goals] += total_goals
+          season_totals[season][:games] += 1
+        end
+      
+        averages = {}
+
+        season_totals.each do |season, data|
+          averages[season] = (data[:goals].to_f / data[:games]).round(2)
+        end
+      
+        averages
     end
 end
