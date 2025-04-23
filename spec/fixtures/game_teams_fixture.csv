@@ -1,0 +1,7 @@
+game_id,team_id,hoa,result,settled_in,head_coach,goals,shots,tackles,pim,powerPlayOpportunities,powerPlayGoals,faceOffWinPercentage,giveaways,takeaways
+1,3,away,LOSS,OT,Coach A,2,10,5,4,2,1,48.3,1,2
+1,6,home,WIN,OT,Coach B,3,14,8,6,3,1,51.7,2,3
+2,5,away,TIE,REG,Coach C,1,12,6,5,2,0,49.9,1,1
+2,1,home,TIE,REG,Coach D,1,13,7,3,1,0,50.1,0,2
+3,8,away,LOSS,REG,Coach E,0,11,5,4,2,0,46.2,1,2
+3,2,home,WIN,REG,Coach F,4,16,9,2,3,2,53.8,2,3
