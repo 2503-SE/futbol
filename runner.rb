@@ -13,25 +13,11 @@ locations = {
 
 stat_tracker = StatTracker.from_csv(locations)
 
-# require 'pry'; binding.pry
-
-CSV.foreach(locations[:games], headers: true, header_converters: :symbol) do |row|
-
-  locations = StatTracker.new(
-    row[:game_id].to_i,
-    row[:team_id].to_i,
-    row[:hoa],
-    row[:result],
-    row[:settled_in],
-    row[:head_coach],
-    row[:goals].to_i,
-    row[:shots].to_i,
-    row[:tackles].to_i,
-    row[:pim].to_i,
-    row[:power_play_opportunities].to_i,
-    row[:power_play_goals].to_i,
-    row[:face_off_win_percentage].to_f,
-    row[:giveaways].to_i,
-    row[:takeaways].to_i
-  )
-end
+# added these here to confirm that we are now successfully dealing with
+# the actual objects and no longer dealing with CSV::Row directly
+puts stat_tracker.games.first.class      
+# => Game
+puts stat_tracker.teams.first.class      
+# => Team
+puts stat_tracker.game_teams.first.class 
+# => GameTeam
