@@ -1,10 +1,20 @@
 require 'CSV'
 require_relative './game'
 require_relative './team'
+require_relative './game_team'
+# require_relative './game_factory'
+# require_relative './team_factory'
+# require_relative './game_team_factory'
+# require_relative './lib.game_statistics'
+# require_relative './lib.league_statistics'
+# require_relative './lib.season_statistics'
 
 class StatTracker
 
+    # include GameStatistics, LeagueStatistics, SeasonStatistics
+
     attr_reader :games, :teams, :game_teams
+    
     def initialize(games, teams, game_teams)
         @games = games
         @teams = teams
@@ -12,9 +22,9 @@ class StatTracker
     end
 
     def self.from_csv(locations)
-        games = CSV.read(locations[:games], headers: true, header_converters: :symbol)
-        teams = CSV.read(locations[:teams], headers: true, header_converters: :symbol)
-        game_teams = CSV.read(locations[:game_teams], headers: true, header_converters: :symbol)
+        games = CSV.read(locations[:games], headers: true, header_converters: :symbol).map { |row| Game.new(row) }
+        teams = CSV.read(locations[:teams], headers: true, header_converters: :symbol).map { |row| Team.new(row) }
+        game_teams = CSV.read(locations[:game_teams], headers: true, header_converters: :symbol).map { |row| GameTeam.new(row) }
 
         StatTracker.new(games, teams, game_teams)
     end

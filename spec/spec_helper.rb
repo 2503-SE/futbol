@@ -1,5 +1,13 @@
+require 'simplecov'
+SimpleCov.start do
+  add_filter "/spec/"
+end
 require 'pry'
 require 'rspec'
 require './lib/stat_tracker.rb'
 require './spec/game_spec.rb'
 require './spec/team_spec.rb'
+require './spec/game_team_spec.rb'
+require './spec/game_factory.rb'
+require './spec/team_factory.rb'
+require './spec/game_team_factory.rb'
