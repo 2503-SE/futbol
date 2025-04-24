@@ -1,7 +1,7 @@
-team_id,franchise_id,team_name,abbreviation,stadium_link
-1,23,Team One,ONE,/team1
-2,52,Team Two,TWO,/team2
-3,18,Team Three,THR,/team3
-5,17,Team Five,FIV,/team5
-6,15,Team Six,SIX,/team6
-8,30,Team Eight,EIG,/team8
+team_id,franchise_id,team_name,abbreviation,stadium,link
+1,23,Team One,ONE,Arena One,/link1
+2,24,Team Two,TWO,Arena Two,/link2
+3,25,Team Three,THR,Arena Three,/link3
+4,26,Team Four,FOU,Arena Four,/link4
+5,27,Team Five,FIV,Arena Five,/link5
+6,28,Team Six,SIX,Arena Six,/link6
