@@ -174,18 +174,28 @@ RSpec.describe StatTracker do
 
         it '#most_accurate_team' do
             
+
+
+            expect(stat_tracker.most_accurate_team("20122013")).to eq()
         end
 
         it '#least_accurate_team' do
-            
+           
+        
+        expect(stat_tracker.least_accurate_team("20122013")).to eq()
         end
 
         it '#most_tackles' do
            
+
+        expect(stat_tracker.most_tackles("20122013")).to eq()
         end
 
         it '#fewest_tackles' do
             
+
+        expect(stat_tracker.fewest_tackles("20122013")).to eq()
+
         end
     end
 

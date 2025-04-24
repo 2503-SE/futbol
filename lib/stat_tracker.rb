@@ -133,24 +133,35 @@ class StatTracker
         end
     end
 
+    # Returns the ame of the head coach with the best win percentage for a given season
     def winningest_coach(season)
+        # Filter game_team rows that belong to the given season
         game_team_rows_in_season = game_team_seasons(season)
 
+        #Create a hash to track each coach's total games and wins
         coach_records = Hash.new do |coach_record, coach| 
             coach_record[coach] = { :wins => 0, :total => 0 }
         end
-    
+
+        # Iterate through each GameTeam row for the season
         game_team_rows_in_season.each do |game_team|
             coach = game_team.head_coach
+            
+            # Increment the total games played for that coach regardless if result is "WIN" or "LOSS"
             coach_records[coach][:total] += 1
+            
+            # Increment wins only if the result is "WIN"
             coach_records[coach][:wins] += 1 if game_team.result == "WIN"
         end
 
+            # Find the coach with the highest win percentage (game wins / total games)
         coach_records.max_by do |coach, season_stats|
             season_stats[:wins].to_f / season_stats[:total]
         end.first
     end
 
+    # Returns the name of the head coach with the lowest win percentage for a given season
+    # same as #winningest_coach except using coach_records.min_by instead of coach_records.max_by
     def worst_coach(season)
         game_team_rows_in_season = game_team_seasons(season)
 
@@ -164,6 +175,7 @@ class StatTracker
             coach_records[coach][:wins] += 1 if game_team.result == "WIN"
         end
 
+        # Find the coach with the lowest win percentage (game wins / total games)
         coach_records.min_by do |coach, season_stats|
             season_stats[:wins].to_f / season_stats[:total]
         end.first
