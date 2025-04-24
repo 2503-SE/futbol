@@ -151,8 +151,22 @@ class StatTracker
         end.first
     end
 
-    def worst_coach
+    def worst_coach(season)
+        game_team_rows_in_season = game_team_seasons(season)
 
+        coach_records = Hash.new do |coach_record, coach| 
+            coach_record[coach] = { :wins => 0, :total => 0 }
+        end
+    
+        game_team_rows_in_season.each do |game_team|
+            coach = game_team.head_coach
+            coach_records[coach][:total] += 1
+            coach_records[coach][:wins] += 1 if game_team.result == "WIN"
+        end
+
+        coach_records.min_by do |coach, season_stats|
+            season_stats[:wins].to_f / season_stats[:total]
+        end.first
     end
 
     def most_accurate_team

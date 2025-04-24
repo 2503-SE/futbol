@@ -161,6 +161,15 @@ RSpec.describe StatTracker do
 
         it '#worst_coach' do
             
+            # Expected coach_records hash after filtering by for the 20122013 season:
+            
+            # {
+            #   "Coach A" => { wins: 0, total: 3 },
+            #   "Coach B" => { wins: 3, total: 3 },
+            #   "Coach C" => { wins: 1, total: 2 }
+            # }
+
+            expect(stat_tracker.worst_coach("20122013")).to eq("Coach A")
         end
 
         it '#most_accurate_team' do
