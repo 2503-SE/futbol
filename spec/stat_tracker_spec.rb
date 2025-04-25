@@ -188,9 +188,18 @@ RSpec.describe StatTracker do
             expect(stat_tracker.most_accurate_team("20122013")).to eq("Team Three")
         end
 
+
         it '#least_accurate_team' do
 
            # Expected team_accuracy_data hash after filtering for just the 20122013 season:
+
+        it "can average goals per game" do 
+            stat_tracker = StatTracker.from_csv({
+                games: './spec/fixtures/games_fixture.csv',
+                teams: './spec/fixtures/teams_fixture.csv',
+                game_teams: './spec/fixtures/game_teams_fixture.csv'
+              })
+
             
             # {
             #   "Team One" => { goals: 5, shots: 28 },
@@ -238,8 +247,10 @@ RSpec.describe StatTracker do
         end
     end
 
-    #Spec Harness comparison tests for entire dataset
-    xdescribe 'spec_harness results' do
+    
+      
+      describe 'spec_harness results' do
+
 
         before(:each) do
             
@@ -312,37 +323,39 @@ RSpec.describe StatTracker do
             expect(@stat_tracker.average_goals_by_season).to eq expected
         end
     
-        #League Statistics - Austin
 
-        it '#count_of_teams' do
+        # League Statistics
+
+        describe 'League Statistics' do
+            it "#count_of_teams" do
             expect(@stat_tracker.count_of_teams).to eq 32
-        end
-
-        it '#best_offense' do
+            end
+        
+            it "#best_offense" do
             expect(@stat_tracker.best_offense).to eq "Reign FC"
-        end
-
-        it '#worst_offense' do
+            end
+        
+            it "#worst_offense" do
             expect(@stat_tracker.worst_offense).to eq "Utah Royals FC"
-        end
-
-        it '#highest_scoring_visitor' do
+            end
+        
+            it "#highest_scoring_visitor" do
             expect(@stat_tracker.highest_scoring_visitor).to eq "FC Dallas"
-        end
-
-        it '#highest_scoring_home_team' do
+            end
+        
+            it "#highest_scoring_home_team" do
             expect(@stat_tracker.highest_scoring_home_team).to eq "Reign FC"
-        end
-
-        it '#lowest_scoring_visitor' do
+            end
+        
+            it "#lowest_scoring_visitor" do
             expect(@stat_tracker.lowest_scoring_visitor).to eq "San Jose Earthquakes"
-        end
+            end
+        
+            it "#lowest_scoring_home_team" do
 
-        it '#lowest_scoring_home_team' do
             expect(@stat_tracker.lowest_scoring_home_team).to eq "Utah Royals FC"
+            end
         end
-
-        #Season Statistics - Nick
 
         it '#winningest_coach' do
             expect(@stat_tracker.winningest_coach("20132014")).to eq "Claude Julien"
