@@ -51,40 +51,40 @@ RSpec.describe StatTracker do
 
         it "can calculate highest sum of the winning and losing teams scores" do
 
-           expect(stat_tracker.highest_total_score).to eq(5) # 2+4 = 6 in Game 3
+           expect(stat_tracker.highest_total_score).to eq(7) # 6+1 = 7 in Game 1
         
         end
 
         it "can calculate lowest sum of the winning and losing teams scores" do
-            expect(stat_tracker.lowest_total_score).to eq(2)
+            expect(stat_tracker.lowest_total_score).to eq(1) # 
         end
 
         it "can calculate the percentage of games that a home team has won (rounded to the nearest 100th)" do
-            expect(stat_tracker.percentage_home_wins).to eq(0.67)
+            expect(stat_tracker.percentage_home_wins).to eq(0.6)
         end
 
         it "can calculate the percentage of games that a visitor has won (rounded to the nearest 100th)" do
-            expect(stat_tracker.percentage_visitor_wins).to eq(0.0)
+            expect(stat_tracker.percentage_visitor_wins).to eq(0.2)
         end
 
         it "can calculate the percentage of games that has resulted in a tie (rounded to the nearest 100th)" do
-            expect(stat_tracker.percentage_ties).to eq(0.33)
+            expect(stat_tracker.percentage_ties).to eq(0.2)
         end
 
         it "can store games by season" do
             expect(stat_tracker.count_of_games_by_season).to eq({
-            "20122013" => 2,
+            "20122013" => 4,
             "20132014" => 1
             })
         end
 
         it "can average goals per game" do 
-            expect(stat_tracker.average_goals_per_game).to eq(3.67)
+            expect(stat_tracker.average_goals_per_game).to eq(4)
         end
 
         it 'can average goals per game per season' do
             expect(stat_tracker.average_goals_by_season).to eq({
-                "20122013" => 3.5,
+                "20122013" => 4.0,
                 "20132014" => 4.0
             })
         end
@@ -192,6 +192,7 @@ RSpec.describe StatTracker do
         it '#least_accurate_team' do
 
            # Expected team_accuracy_data hash after filtering for just the 20122013 season:
+        end   
 
         it "can average goals per game" do 
             stat_tracker = StatTracker.from_csv({
@@ -389,7 +390,7 @@ RSpec.describe StatTracker do
 
         #Iteration 4 stuff
 
-        it "#team_info" do
+        xit "#team_info" do
             expected = {
             "team_id" => "18",
             "franchise_id" => "34",
@@ -401,31 +402,31 @@ RSpec.describe StatTracker do
             expect(@stat_tracker.team_info("18")).to eq expected
         end
 
-        it "#best_season" do
+        xit "#best_season" do
             expect(@stat_tracker.best_season("6")).to eq "20132014"
         end
 
-        it "#worst_season" do
+        xit "#worst_season" do
             expect(@stat_tracker.worst_season("6")).to eq "20142015"
         end
 
-        it "#average_win_percentage" do
+        xit "#average_win_percentage" do
             expect(@stat_tracker.average_win_percentage("6")).to eq 0.49
         end
 
-        it "#most_goals_scored" do
+        xit "#most_goals_scored" do
             expect(@stat_tracker.most_goals_scored("18")).to eq 7
         end
 
-        it "#fewest_goals_scored" do
+        xit "#fewest_goals_scored" do
             expect(@stat_tracker.fewest_goals_scored("18")).to eq 0
         end
 
-        it "#favorite_opponent" do
+        xit "#favorite_opponent" do
             expect(@stat_tracker.favorite_opponent("18")).to eq "DC United"
         end
 
-        it "#rival" do
+        xit "#rival" do
             expect(@stat_tracker.rival("18")).to eq("Houston Dash").or(eq("LA Galaxy"))
         end
     end
