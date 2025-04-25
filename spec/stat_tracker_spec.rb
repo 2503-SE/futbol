@@ -91,8 +91,45 @@ RSpec.describe StatTracker do
     end
     
     #League Statistics - Austin
+    # fill in if time
     describe 'calculate league statistics' do
-
+        
+        let(:locations) do {
+              games: './spec/fixtures/games_fixture.csv',
+              teams: './spec/fixtures/teams_fixture.csv',
+              game_teams: './spec/fixtures/game_teams_fixture.csv'
+            }
+          end
+        
+        let(:stat_tracker) { StatTracker.from_csv(locations) }
+    
+        it "#best_offense" do
+            expect(stat_tracker.best_offense).to eq("Team Three")
+        end
+        
+        it "#worst_offense" do
+            expect(stat_tracker.worst_offense).to eq("Team Two")
+        end
+        
+        it "#highest_scoring_visitor" do
+            expect(stat_tracker.highest_scoring_visitor).to eq("Team Three")
+        end
+        
+        it "#highest_scoring_home_team" do
+            expect(stat_tracker.highest_scoring_home_team).to eq("Team Six")
+        end
+        
+        it "#lowest_scoring_visitor" do
+            expect(stat_tracker.lowest_scoring_visitor).to eq("Team Two")
+        end
+        
+        it "#lowest_scoring_home_team" do
+            expect(stat_tracker.lowest_scoring_home_team).to eq("Team Four")
+        end
+        
+        it "#count_of_teams" do
+            expect(stat_tracker.count_of_teams).to eq 6
+        end
     end
 
     #Season Statistics - Nick
@@ -188,19 +225,9 @@ RSpec.describe StatTracker do
             expect(stat_tracker.most_accurate_team("20122013")).to eq("Team Three")
         end
 
-
         it '#least_accurate_team' do
 
            # Expected team_accuracy_data hash after filtering for just the 20122013 season:
-        end   
-
-        it "can average goals per game" do 
-            stat_tracker = StatTracker.from_csv({
-                games: './spec/fixtures/games_fixture.csv',
-                teams: './spec/fixtures/teams_fixture.csv',
-                game_teams: './spec/fixtures/game_teams_fixture.csv'
-              })
-
             
             # {
             #   "Team One" => { goals: 5, shots: 28 },
@@ -250,10 +277,9 @@ RSpec.describe StatTracker do
 
     
       
-      describe 'spec_harness results' do
+    describe 'spec_harness results' do
 
-
-        before(:each) do
+        before(:all) do
             
             game_path = './data/games.csv'
             team_path = './data/teams.csv'
@@ -325,9 +351,10 @@ RSpec.describe StatTracker do
         end
     
 
-        # League Statistics
+        # League Statistics - Austin
 
         describe 'League Statistics' do
+
             it "#count_of_teams" do
             expect(@stat_tracker.count_of_teams).to eq 32
             end
@@ -358,6 +385,9 @@ RSpec.describe StatTracker do
             end
         end
 
+        # season statistics - Nick
+        describe 'season statistics' do
+
         it '#winningest_coach' do
             expect(@stat_tracker.winningest_coach("20132014")).to eq "Claude Julien"
             expect(@stat_tracker.winningest_coach("20142015")).to eq "Alain Vigneault"
@@ -387,8 +417,9 @@ RSpec.describe StatTracker do
             expect(@stat_tracker.fewest_tackles("20132014")).to eq "Atlanta United"
             expect(@stat_tracker.fewest_tackles("20142015")).to eq "Orlando City SC"
         end
-
-        #Iteration 4 stuff
+    end
+        
+    # skipping Iteration 4 stuff
 
         xit "#team_info" do
             expected = {
