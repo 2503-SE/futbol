@@ -39,3 +39,20 @@ Create a section in your README called “Contributors”. List each group membe
 - **Nick Rathbone**  
   - [GitHub](https://github.com/orgs/2503-SE/people/nrathbone-turing)  
   - LinkedIn: N/A
+
+
+## Iteration 3
+**The name of and links (if applicable) to any tools you used for retro**
+  - explored using some of the provided tools like [easy retro](https://easyretro.io/) and [atlassian retro](https://www.atlassian.com/team-playbook/plays/retrospective)
+  - ended up creating a scuffed retro in github using projects (See the included screenshot of scuffed retro in github; we couldn't figure out how to rename the status columns so we just made placeholder issues to represent the different categories in our retro discussion)
+  - we did end up referencing the [article about retro content](https://www.smarttask.io/blog/project-retrospective-meeting) a bunch, so that was helpful to have access to
+
+**Top 3 things that went well during your project**
+  - good and frequent communication which allowed us to work async successfully and also collaborate in real time when necessary
+  - we felt that we had a positive experience overall using github to manage our project and spent a good amount of time planning in Iteration 3 initially to divide up the work fairly evenly, too
+  - we also felt that our initial collaborative configuration of the stat_tracker file in Iteration 2 went well overall, too, and was a good use of time to make sure each member was familiarized with everything before splitting apart to work on things async
+
+**Top 3 things your team would do differently next time**
+  - github projects was a nightmare to setup and wasted so much of our time trying to figure out permissions and necessary organizations and how to transfer ownership from an individual's forked repo to the organization in the first place just to be able to have other admins create issues and projects
+  - we really didn't have an accurate understanding of the size/scope of this project from the start, compared to the other projects, and even though this one was not as intensive code-wise, it was still intensive time-wise and scheduling coordination wise
+  - The unfortunate closure of Turing during the lead up to this project was very demotivating for all of us and it was a real struggle to keep up the effort and attention necessary to submit a successful project, but we were able to provide a supportive environment for the group to debrief as needed and managed to push through at the end
