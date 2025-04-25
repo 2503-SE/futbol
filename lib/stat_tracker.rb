@@ -122,39 +122,39 @@ class StatTracker
     def game_team_seasons(season)
 
         @game_teams.select do |game_team|
-            # Loop through each GameTeam object (instantiated rows from parsed .csv files)
+            # loop through each GameTeam object (instantiated rows from parsed .csv files)
           game = @games.find do |game|
-            # For each GameTeam, find the matching Game object by game_id (on a given row from each spreadsheet)
+            # for each GameTeam, find the matching Game object by game_id (on a given row from each spreadsheet)
             game.game_id == game_team.game_id
           end
         
         game && game.season == season
-        # Then, only include this GameTeam if the matching Game exists AND the season matches
+        # then, only include this GameTeam if the matching Game exists AND the season matches
         end
     end
 
     # Returns the ame of the head coach with the best win percentage for a given season
     def winningest_coach(season)
-        # Filter game_team rows that belong to the given season
+        # filter game_team rows that belong to the given season
         game_team_rows_in_season = game_team_seasons(season)
 
-        #Create a hash to track each coach's total games and wins
+        #create a hash to track each coach's total games and wins
         coach_records = Hash.new do |coach_record, coach| 
             coach_record[coach] = { :wins => 0, :total => 0 }
         end
 
-        # Iterate through each GameTeam row for the season
+        # iterate through each GameTeam row for the season
         game_team_rows_in_season.each do |game_team|
             coach = game_team.head_coach
             
-            # Increment the total games played for that coach regardless if result is "WIN" or "LOSS"
+            # increment the total games played for that coach regardless if result is "WIN" or "LOSS"
             coach_records[coach][:total] += 1
             
-            # Increment wins only if the result is "WIN"
+            # increment wins only if the result is "WIN"
             coach_records[coach][:wins] += 1 if game_team.result == "WIN"
         end
 
-            # Find the coach with the highest win percentage (game wins / total games)
+            # find the coach with the highest win percentage (game wins / total games)
         coach_records.max_by do |coach, season_stats|
             season_stats[:wins].to_f / season_stats[:total]
         end.first
@@ -181,19 +181,75 @@ class StatTracker
         end.first
     end
 
-    def most_accurate_team
+    def most_accurate_team(season)
+        game_team_rows_in_season = game_team_seasons(season)
+
+        #Create a hash to track each team's total goals and shots
+        team_accuracy_data = Hash.new do |hash, team_id|
+            hash[team_id] = { goals: 0, shots: 0 }
+          end
+          
+        # store and group by team_id
+        game_team_rows_in_season.each do |game_team|
+            team = game_team.team_id
+
+            # no conditions for the increments here just summing 
+            # all of the goals and all of the shots per team
+            team_accuracy_data[team][:goals] += game_team.goals
+            team_accuracy_data[team][:shots] += game_team.shots
+        end
+        
+        # find the team_id with the best accuracy (highest goal-to-shot ratio)
+        most_accurate_team_id = 
+            team_accuracy_data.max_by do |team_id, stats|
+                stats[:goals].to_f / stats[:shots]
+            end.first
+        
+        # look up the team name using the team_id from previous iteration
+        team = @teams.find do |team| 
+            team.team_id == most_accurate_team_id
+        end
+
+        team.team_name
+    end
+
+    # same as #most_accurate_team except using team_accuracy_data.min_by instead of team_accuracy_data.max_by
+    def least_accurate_team(season)
+        game_team_rows_in_season = game_team_seasons(season)
+
+        team_accuracy_data = Hash.new do |hash, team_id|
+            hash[team_id] = { goals: 0, shots: 0 }
+          end
+          
+        # store and group by team_id
+        game_team_rows_in_season.each do |game_team|
+            team = game_team.team_id
+
+            team_accuracy_data[team][:goals] += game_team.goals
+            team_accuracy_data[team][:shots] += game_team.shots
+        end
+        
+        # find the team_id with the worst accuracy (lowest goal-to-shot ratio)
+        most_accurate_team_id = 
+            team_accuracy_data.min_by do |team_id, stats|
+                stats[:goals].to_f / stats[:shots]
+            end.first
+        
+        # look up the team name using the team_id from previous iteration
+        team = @teams.find do |team| 
+            team.team_id == most_accurate_team_id
+        end
+
+        team.team_name
+    end
+
+    def most_tackles(season)
+        game_team_rows_in_season = game_team_seasons(season)
 
     end
 
-    def least_accurate_team
-
-    end
-
-    def most_tackles
-
-    end
-
-    def fewest_tackles
+    def fewest_tackles(season)
+        game_team_rows_in_season = game_team_seasons(season)
 
     end
 
