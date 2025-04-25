@@ -113,6 +113,7 @@ class StatTracker
 
     #League Statistics - Austin
 
+    #all of these methods added to the `league_statistics.rb` module
 
 
     #Season Statistics - Nick
