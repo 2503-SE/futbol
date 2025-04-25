@@ -189,7 +189,7 @@ RSpec.describe StatTracker do
         end
 
         it '#least_accurate_team' do
-        
+
            # Expected team_accuracy_data hash after filtering for just the 20122013 season:
             
             # {
@@ -201,19 +201,39 @@ RSpec.describe StatTracker do
             #   "Team Six" => { goals: 3, shots: 14 }
             # }
         
-        expect(stat_tracker.least_accurate_team("20122013")).to eq("Team Two")
+            expect(stat_tracker.least_accurate_team("20122013")).to eq("Team Two")
         end
 
         it '#most_tackles' do
-           
 
-        expect(stat_tracker.most_tackles("20122013")).to eq()
+           # Expected team_tackles_data hash after filtering for just the 20122013 season:
+            
+           # {
+            #   "Team One" => { tackles: 13 },
+            #   "Team Two" => { tackles: 5 },
+            #   "Team Three" => { tackles: 9 },
+            #   "Team Four" => { tackles: 9 },
+            #   "Team Five" => { tackles: 6 },
+            #   "Team Six" => { tackles: 8 }
+            # }
+
+            expect(stat_tracker.most_tackles("20122013")).to eq("Team One")
         end
 
         it '#fewest_tackles' do
             
+            # Expected team_tackles_data hash after filtering for just the 20122013 season:
+            
+           # {
+            #   "Team One" => { tackles: 13 },
+            #   "Team Two" => { tackles: 5 },
+            #   "Team Three" => { tackles: 9 },
+            #   "Team Four" => { tackles: 9 },
+            #   "Team Five" => { tackles: 6 },
+            #   "Team Six" => { tackles: 8 }
+            # }
 
-        expect(stat_tracker.fewest_tackles("20122013")).to eq()
+            expect(stat_tracker.fewest_tackles("20122013")).to eq("Team Two")
 
         end
     end

@@ -185,8 +185,8 @@ class StatTracker
         game_team_rows_in_season = game_team_seasons(season)
 
         #Create a hash to track each team's total goals and shots
-        team_accuracy_data = Hash.new do |hash, team_id|
-            hash[team_id] = { goals: 0, shots: 0 }
+        team_accuracy_data = Hash.new do |accuracy_data, team_id|
+            accuracy_data[team_id] = { goals: 0, shots: 0 }
           end
           
         # store and group by team_id
@@ -217,8 +217,8 @@ class StatTracker
     def least_accurate_team(season)
         game_team_rows_in_season = game_team_seasons(season)
 
-        team_accuracy_data = Hash.new do |hash, team_id|
-            hash[team_id] = { goals: 0, shots: 0 }
+        team_accuracy_data = Hash.new do |accuracy_data, team_id|
+            accuracy_data[team_id] = { goals: 0, shots: 0 }
           end
           
         # store and group by team_id
@@ -246,11 +246,65 @@ class StatTracker
     def most_tackles(season)
         game_team_rows_in_season = game_team_seasons(season)
 
+        #Create a hash to track each team's total tackles
+        team_tackles_data = Hash.new do |tackles, team_id|
+            tackles[team_id] = { tackles: 0 }
+          end
+          
+        # store and group by team_id
+        game_team_rows_in_season.each do |game_team|
+            team = game_team.team_id
+
+            # no conditions for the increments here just summing 
+            # all of the tackles per team per season
+            team_tackles_data[team][:tackles] += game_team.tackles
+        end
+        
+        # find the team_id with the most tackles for the season
+        most_tackles_team_id = 
+            team_tackles_data.max_by do |team_id, stats|
+                stats[:tackles]
+            end.first
+        
+        # look up the team name using the team_id from previous iteration
+        team = @teams.find do |team| 
+            team.team_id == most_tackles_team_id
+        end
+
+        # return the team name with the most tackles
+        team.team_name
     end
 
+     # same as #most_tackles except using team_tackles_data.min_by instead of team_tackles_data.max_by
     def fewest_tackles(season)
         game_team_rows_in_season = game_team_seasons(season)
 
+        #Create a hash to track each team's total tackles
+        team_tackles_data = Hash.new do |tackles, team_id|
+            tackles[team_id] = { tackles: 0 }
+          end
+          
+        # store and group by team_id
+        game_team_rows_in_season.each do |game_team|
+            team = game_team.team_id
+
+            # no conditions for the increments here just summing 
+            # all of the tackles per team per season
+            team_tackles_data[team][:tackles] += game_team.tackles
+        end
+        
+        # find the team_id with the fewest tackles for the season
+        most_tackles_team_id = 
+            team_tackles_data.min_by do |team_id, stats|
+                stats[:tackles]
+            end.first
+        
+        # look up the team name using the team_id from previous iteration
+        team = @teams.find do |team| 
+            team.team_id == most_tackles_team_id
+        end
+
+        team.team_name
     end
 
 
