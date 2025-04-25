@@ -1,4 +1,4 @@
-team_id,franchise_id,team_name,abbreviation,stadium,link
+team_id,franchiseid,teamname,abbreviation,stadium,link
 1,23,Team One,ONE,Arena One,/link1
 2,24,Team Two,TWO,Arena Two,/link2
 3,25,Team Three,THR,Arena Three,/link3
